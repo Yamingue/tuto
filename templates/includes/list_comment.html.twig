@@ -1,0 +1,13 @@
+{% for c in comments %}
+    <div class="row">
+        <div class="col-12 mt-2">
+            <div class="card  ">
+                <div class="card-body">
+                  <p class="card-text">
+                    {{ c.content }}
+                  </p>               </div>
+                <div class="card-footer">{{ c.makeAt |ago }}</div>
+              </div>
+        </div>
+    </div>
+{% endfor %}

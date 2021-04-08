@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container mb-4">
+        <div class="card">
+            <div class="card-body d-flex flex-row">
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle me-3" height="50px"
+                width="50px" alt="avatar" />
+              <div>
+                <h5 class="card-title font-weight-bold mb-2">{{ post.autor.username }}</h5>
+                <p class="card-text"><i class="far fa-clock pe-2"></i>{{ post.postAt | ago }}</p>
+              </div>
+            </div>
+            <div class="bg-image hover-overlay ripple rounded-0" data-mdb-ripple-color="light">
+              <img class="img-fluid" src="{{ post.image }}"
+                alt="Card image cap" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <a class="btn btn-link link-danger p-md-1 my-1"
+                  role="button" aria-expanded="false" aria-controls="collapseContent" href="{{ path('like',{id:post.id}) }}"><i class="{% if app.user in post.likes %}fas{% else %}far{% endif %} fa-heart text-muted p-md-1 my-1 me-0" data-mdb-toggle="tooltip" data-mdb-placement="top"
+                  title="I like it" style="color: blue;"></i> {{ post.likes |length }}</a>
+                <div>
+                  <i class="fas fa-share-alt text-muted p-md-1 my-1 me-2" data-mdb-toggle="tooltip"
+                    data-mdb-placement="top" title="Share this post"></i>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% include "includes/list_comment.html.twig" with {'comments':post.comments} %}
+          <div class="card  mt-2">
+            <div class="card-body">
+              <p class="card-text">
+                {{ form_start(form)}}
+                {{ form_widget(form)}}
+                <button type="submit" class="btn btn-outline-primary mt-2" data-mdb-ripple-color="#000000"> envoyer <i class="fas fa-paper-plane"></i></button>
+                {{ form_end(form)}}
+              </p>
+          
+          
+            </div>
+          </div>
+    </div>
+{% endblock %}
